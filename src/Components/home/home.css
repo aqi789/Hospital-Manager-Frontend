@@ -1,0 +1,16 @@
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+}
+
+.parallax-img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  background-position: center !important;
+}

@@ -1,0 +1,14 @@
+#bar {
+  background-color:#3ba9a9;
+border-right:1px solid black; 
+padding-right:10px; 
+box-shadow:12px 12px 18px #484c4c;
+ height:150% !important;
+}
+
+
+.logoutButton:hover {
+  background-color: #ddd !important;
+  color: #3ba9a9 !important;
+}
+
