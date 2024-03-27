@@ -71,8 +71,12 @@ const EmpCard = () => {
 
             <div className="card-body">
               <h4 className="card-title m-2">{employee.name}</h4>
+              <Link to={`/dashboard/singleDept/${employee.department}`} style={{color:'#3ba9a9'}}>
               <h5 className="card-title m-2">{employee.department}</h5>
+              </Link>
+              <Link to={`/dashboard/singleDeptHead/${employee.report}`} style={{color:'#3ba9a9'}}>
               <p className="card-title m-2">Report to: {employee.report}</p>
+              </Link>
               <p className="card-text">Employee Number: {employee.number}</p>
               <p className="card-text">Employee Age: {employee.age}</p>
               <p className="card-text">{employee.description}</p>

@@ -1,58 +1,48 @@
-import React, { useEffect, useState } from "react";
-import Sidebar from "../Sidebar";
+import React, { useEffect, useState } from 'react'
+import DashboardNav from '../DashbboardNav'
+import Sidebar from '../Sidebar'
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { Link } from "react-router-dom";
-import DashbboardNav from "../DashbboardNav";
 
-const DeptHeadCard = () => {
-  const [head, setHead] = useState([]);
+const SingleDeptHead = () => {
 
-  useEffect(() => {
-    fetchHead();
-  }, []);
+    const [head, setHead]=useState(null);
+    const {id}=useParams();
 
-  const fetchHead = () => {
-    axios
-      .get("http://localhost:3001/getHead")
-      .then((res) => {
-        setHead(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:3001/headDelete/${id}`)
-      .then((res) => {
-        console.log("Deleted");
-        window.location.reload();
+    useEffect(()=>{
+        const fetchHead=async()=>{
+            try{
+                const response=await axios.get(`http://localhost:3001/getHeadByName/${id}`);
+                setHead(response.data);
+            } catch(err) {
+                console.log("Error fetching department head", err);
+            }
+        }
         fetchHead();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    },[id])
+
+    if(!head) {
+        return<div>Loading department head...</div>
+    }
+
   return (
-    <div style={{ backgroundColor: "#3ba9a9", height: "100%" }}>
-      <div>
-        <DashbboardNav />
-      </div>
-      <div>
-        <Sidebar />
-      </div>
-      <div
+    <div style={{ backgroundColor: "#3ba9a9", height: "100vh" }}>
+    <div>
+      <DashboardNav />
+    </div>
+    <div>
+      <Sidebar />
+    </div>
+    <div
         className="d-flex flex-wrap justify-content-center align-items-center"
-        style={{ marginLeft: "190px", paddingTop: "70px" }}
+        style={{ marginLeft: "190px", paddingTop: "160px" }}
       >
-        {head.map((head, index) => (
           <div
-            key={index}
             className="card "
             style={{
-              width: "300px",
-              height: "350px",
+              width: "500px",
+              height: "445px",
               textAlign: "center",
               overflowY: "scroll",
               margin: "10px",
@@ -106,16 +96,14 @@ const DeptHeadCard = () => {
                   width: "40%",
                   margin: "4px",
                 }}
-                onClick={() => handleDelete(head._id)}
               >
                 Delete
               </button>
             </div>
           </div>
-        ))}
-      </div>
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default DeptHeadCard;
+export default SingleDeptHead

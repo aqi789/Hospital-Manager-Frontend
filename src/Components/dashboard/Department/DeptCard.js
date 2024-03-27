@@ -32,14 +32,14 @@ const DeptCard = () => {
     axios
       .delete(`http://localhost:3001/deptDelete/${id}`)
       .then((res) => {
-        console.log("deleted");
+        console.log("Department deleted");
         setDepartments(departments.filter((dept) => dept._id !== id));
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Error deleting department:", err);
       });
   };
-
+  
   if (loading) {
     return <div>Loading...</div>;
   }
